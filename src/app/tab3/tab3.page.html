@@ -1,9 +1,60 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Tab Three
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content></ion-content>
+    <ion-toolbar>
+      <ion-title>
+        LAIA
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <div class="spinner" *ngIf="loading">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+    <div *ngIf="!loading">
+      <ion-card>
+        <img src="/assets/img/laia.jpg" alt="" />
+        <ion-card-header>
+          <ion-card-subtitle>Tu saldo es de:</ion-card-subtitle>
+          <ion-card-title>{{ calcularBalance() | number : '1.2-2' }}€</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>Puedes consultar el detalle de tus operaciones más abajo</p>
+        </ion-card-content>
+      </ion-card>
+  
+      <ion-list>
+        <ion-list-header>
+          Pagos hechos
+        </ion-list-header>
+  
+        <ion-item *ngFor="let pago of historialLaia">
+          <ion-avatar slot="start">
+            <img src="/assets/img/laia.jpg" />
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ pago[1].importe }}€</h2>
+            <h3>{{ pago[1].fecha }}</h3>
+            <p>{{ pago[1].concepto }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+  
+      <ion-list>
+        <ion-list-header>
+          Pagos recibidos
+        </ion-list-header>
+  
+        <ion-item *ngFor="let pago of historialMarcos">
+          <ion-avatar slot="end">
+            <img src="/assets/img/meta103.png" />
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ pago[1].importe }}€</h2>
+            <h3>{{ pago[1].fecha }}</h3>
+            <p>{{ pago[1].concepto }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
+  

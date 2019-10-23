@@ -1,4 +1,12 @@
-.welcome-card img {
-  max-height: 35vh;
-  overflow: hidden;
+.spinner{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+ion-spinner {
+  width: 100px;
+  height: 100px;
+  stroke: #444;
+  fill: #222;
 }

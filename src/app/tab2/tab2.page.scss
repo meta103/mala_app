@@ -1,1 +1,17 @@
+.azul {
+  color: #00a8e8;
+}
 
+.rosa {
+  color: #b95f89;
+}
+
+.card-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.center {
+  display: flex;
+  justify-content: center;
+}

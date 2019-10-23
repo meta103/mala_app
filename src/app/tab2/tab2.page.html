@@ -1,9 +1,90 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Two
+      MALA APP
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <div class="center">
+    <img src="/assets/icon/mala_app_icon.png" alt="">
+  </div>
+  <form (ngSubmit)="crearGasto()">
+    <ion-item>
+      <ion-label>Importe</ion-label>
+      <ion-input
+        type="number"
+        required
+        [(ngModel)]="todo.importe"
+        name="money"
+        placeholder="€"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Concepto</ion-label>
+      <ion-input
+        type="text"
+        required
+        [(ngModel)]="todo.concepto"
+        name="concepto"
+        placeholder="introduzca breve descripción del pago"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Fecha</ion-label>
+      <ion-datetime
+        #fechaInput
+        (ionChange)="actualizarFecha(fechaInput.value)"
+        placeholder="Elige la fecha"
+      ></ion-datetime>
+    </ion-item>
+    <ion-item>
+        <ion-label>Quién paga?</ion-label>
+        <ion-select
+          required
+          [(ngModel)]="todo.paga"
+          (ionChange)="receptor(todo.paga)"
+          name="paga"
+          placeholder="Elige un nombre"
+        >
+          <ion-select-option value="marcos">Marcos</ion-select-option>
+          <ion-select-option value="laia">Laia</ion-select-option>
+        </ion-select>
+      </ion-item>
+    <ion-card *ngIf="todo.paga">
+        <img *ngIf="todo.paga === 'marcos'" src="./assets/img/meta103.png" />
+        <img *ngIf="todo.paga === 'laia'" src="./assets/img/laia.jpg" />
+        <ion-card-header>
+          <ion-card-title class="card-title">
+        <p [ngClass]="todo.paga === 'marcos' ? 'azul' : 'rosa'">
+          {{ this.todo.paga }}
+        </p>
+        <p>paga a</p>
+        <p [ngClass]="todo.recibe === 'marcos' ? 'azul' : 'rosa'">
+          {{ this.todo.recibe }}
+        </p>
+      </ion-card-title>
+      <ion-card-subtitle>
+        En concepto de
+      </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+          {{todo.concepto}}
+        </ion-card-content>
+    </ion-card>
+    <ion-button
+      [hidden]="
+        todo.paga === '' ||
+        todo.importe === '' ||
+        todo.concepto === '' ||
+        todo.fecha === ''
+      "
+      expand="block"
+      type="submit"
+      block
+    >
+      Confirmar
+    </ion-button>
+  </form>
+</ion-content>
